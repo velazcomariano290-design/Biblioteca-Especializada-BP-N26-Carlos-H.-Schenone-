@@ -63,10 +63,24 @@
             50% { transform: translateY(-10px); }
         }
         
+        .slide-1 .biblioteca-name {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+        
         .slide-1 h2 {
-            font-size: 1.8em;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .slide-1 h3 {
+            font-size: 1.5em;
             margin-bottom: 30px;
             font-weight: 300;
+            font-style: italic;
         }
         
         .slide-1 p {
@@ -343,7 +357,9 @@
         <div class="slide slide-1 active">
             <div>
                 <h1>🎨</h1>
-                <h2>¿QUERÉS APRENDER A DIBUJAR?</h2>
+                <p class="biblioteca-name">Biblioteca Especializada BP N26<br>"Carlos H. Schenone"</p>
+                <h2>La técnica del dibujo</h2>
+                <h3>¿QUERÉS APRENDER A DIBUJAR?</h3>
                 <p>Este libro es tu puerta de entrada a las técnicas fundamentales del dibujo artístico</p>
                 <button class="btn" onclick="nextSlide()">DESCUBRÍ MÁS ⬇️</button>
                 <div class="swipe-hint">Deslizá o tocá para continuar →</div>
@@ -473,13 +489,10 @@
                 
                 <div class="info-box" style="background: rgba(255,255,255,0.2); color: white; border-left-color: white;">
                     <p><strong>✅ Disponibles para préstamo domiciliario</strong></p>
-                    <p>⏰ Consultá horarios de atención en mostrador</p>
                 </div>
             </div>
             
             <div class="buttons-container">
-                <button class="btn">RESERVAR AHORA</button>
-                <button class="btn btn-secondary">VER MÁS LIBROS DE ARTE</button>
                 <div class="navigation">
                     <div class="nav-dot" onclick="goToSlide(0)"></div>
                     <div class="nav-dot" onclick="goToSlide(1)"></div>
