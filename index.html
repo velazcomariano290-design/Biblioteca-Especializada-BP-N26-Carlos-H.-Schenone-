@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -21,9 +21,9 @@
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background: linear-gradient(to bottom, #fffbeb, #fef3c7);
             min-height: 100vh;
-            box-shadow: 0 0 40px rgba(0,0,0,0.2);
+            box-shadow: 0 0 40px rgba(217, 119, 6, 0.4);
         }
         
         .slide {
@@ -46,48 +46,153 @@
         
         /* Slide 1 - Portada */
         .slide-1 {
-            background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%);
-            color: white;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #78350f;
             text-align: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Manchas de pintura decorativas */
+        .slide-1::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, transparent 70%);
+            border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                border-radius: 60% 40% 30% 70% / 40% 50% 60% 50%;
+                transform: rotate(180deg) scale(1.1);
+            }
+        }
+        
+        .slide-1 > div {
+            position: relative;
+            z-index: 1;
         }
         
         .slide-1 h1 {
-            font-size: 3em;
+            font-size: 5em;
             margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            background: linear-gradient(135deg, #FF6B9D, #667eea, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
         }
         
         .slide-1 .biblioteca-name {
-            font-size: 1.3em;
-            margin-bottom: 30px;
-            font-weight: 400;
-            opacity: 0.95;
+            font-size: 1em;
+            margin-bottom: 35px;
+            font-weight: 500;
+            color: #d97706;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .slide-1 .biblioteca-name::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f59e0b, transparent);
         }
         
         .slide-1 h2 {
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            font-weight: 600;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #92400e;
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(245, 158, 11, 0.2);
+        }
+        
+        .slide-1 h2::before {
+            content: "🖌️";
+            position: absolute;
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-15deg);
+            font-size: 0.6em;
+            opacity: 0.6;
+        }
+        
+        .slide-1 h2::after {
+            content: "🎨";
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%) rotate(15deg);
+            font-size: 0.6em;
+            opacity: 0.6;
         }
         
         .slide-1 h3 {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            font-weight: 300;
-            font-style: italic;
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            font-weight: 400;
+            color: #a16207;
         }
         
         .slide-1 p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 50px;
-            opacity: 0.95;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #92400e;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .slide-1 .btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide-1 .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .slide-1 .btn:hover::before {
+            left: 100%;
+        }
+        
+        .slide-1 .btn:hover {
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
+            transform: translateY(-3px);
+        }
+        
+        .slide-1 .swipe-hint {
+            color: rgba(217, 119, 6, 0.7);
         }
         
         /* Slide 2 - Contenido */
@@ -345,6 +450,10 @@
             animation: pulse 2s infinite;
         }
         
+        .slide-1 .swipe-hint {
+            color: rgba(102, 126, 234, 0.6);
+        }
+        
         @keyframes pulse {
             0%, 100% { opacity: 0.7; }
             50% { opacity: 1; }
@@ -356,7 +465,6 @@
         <!-- Slide 1: Portada -->
         <div class="slide slide-1 active">
             <div>
-                <h1>🎨</h1>
                 <p class="biblioteca-name">Biblioteca Especializada BP N26<br>"Carlos H. Schenone"</p>
                 <h2>La técnica del dibujo</h2>
                 <h3>¿QUERÉS APRENDER A DIBUJAR?</h3>
