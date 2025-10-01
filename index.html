@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicas de Dibujo - Biblioteca</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 40px rgba(0,0,0,0.2);
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Slide 1 - Portada */
+        .slide-1 {
+            background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%);
+            color: white;
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .slide-1 h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .slide-1 h2 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .slide-1 p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            opacity: 0.95;
+        }
+        
+        /* Slide 2 - Contenido */
+        .slide-2 {
+            background: linear-gradient(135deg, #FEE140 0%, #FA709A 100%);
+        }
+        
+        .slide-2 h2 {
+            font-size: 2.5em;
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .feature-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-box h3 {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Slide 3 - Temas */
+        .slide-3 {
+            background: linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%);
+        }
+        
+        .slide-3 h2 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .topic-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .topic-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .topic-card::before {
+            content: "✏️";
+            font-size: 2.5em;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .topic-card:nth-child(2)::before { content: "💡"; }
+        .topic-card:nth-child(3)::before { content: "🎨"; }
+        .topic-card:nth-child(4)::before { content: "🖼️"; }
+        
+        .info-box {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .info-box strong {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+        
+        /* Slide 4 - Libro complementario */
+        .slide-4 {
+            background: linear-gradient(135deg, #FFD89B 0%, #19547B 100%);
+        }
+        
+        .slide-4 h2 {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .book-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .book-card h3 {
+            font-size: 1.8em;
+            color: #19547B;
+            margin-bottom: 10px;
+        }
+        
+        .book-card .author {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .book-card p {
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        
+        .book-features {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .book-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        
+        .book-features li::before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* Slide 5 - Ubicación */
+        .slide-5 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .slide-5 h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        
+        .location-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .location-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .location-info p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Botones */
+        .btn {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        /* Navegación */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-dot.active {
+            background: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .swipe-hint {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            margin-top: 20px;
+            font-size: 0.9em;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Slide 1: Portada -->
+        <div class="slide slide-1 active">
+            <div>
+                <h1>🎨</h1>
+                <h2>¿QUERÉS APRENDER A DIBUJAR?</h2>
+                <p>Este libro es tu puerta de entrada a las técnicas fundamentales del dibujo artístico</p>
+                <button class="btn" onclick="nextSlide()">DESCUBRÍ MÁS ⬇️</button>
+                <div class="swipe-hint">Deslizá o tocá para continuar →</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Contenido -->
+        <div class="slide slide-2">
+            <div>
+                <h2>✏️ LO QUE VAS A ENCONTRAR</h2>
+                
+                <div class="feature-box">
+                    <h3>🖍️ Técnicas básicas</h3>
+                    <p>Lápiz • Carbón • Sanguina • Tinta</p>
+                </div>
+                
+                <div class="feature-box">
+                    <h3>💡 Aprende paso a paso</h3>
+                    <p>Desde el encaje hasta el claroscuro</p>
+                </div>
+                
+                <div class="feature-box">
+                    <h3>🎯 Para todos los niveles</h3>
+                    <p>Principiantes y quienes quieren profundizar</p>
+                </div>
+            </div>
+            
+            <div>
+                <div class="navigation">
+                    <div class="nav-dot" onclick="goToSlide(0)"></div>
+                    <div class="nav-dot active"></div>
+                    <div class="nav-dot" onclick="goToSlide(2)"></div>
+                    <div class="nav-dot" onclick="goToSlide(3)"></div>
+                    <div class="nav-dot" onclick="goToSlide(4)"></div>
+                </div>
+                <button class="btn" onclick="nextSlide()">SIGUIENTE →</button>
+            </div>
+        </div>
+
+        <!-- Slide 3: Temas -->
+        <div class="slide slide-3">
+            <div>
+                <h2>📚 TEMAS DESTACADOS</h2>
+                
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <strong>El encaje de las formas</strong>
+                    </div>
+                    <div class="topic-card">
+                        <strong>Luces y sombras</strong>
+                    </div>
+                    <div class="topic-card">
+                        <strong>Del modelo a la pintura</strong>
+                    </div>
+                    <div class="topic-card">
+                        <strong>Naturaleza muerta</strong>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <p><strong>💡 ¿Sabías que...?</strong></p>
+                    <p>Este libro forma parte de la colección "Cuaderno del Artista" de Editorial Parramón, referente mundial en técnicas artísticas.</p>
+                </div>
+            </div>
+            
+            <div>
+                <div class="navigation">
+                    <div class="nav-dot" onclick="goToSlide(0)"></div>
+                    <div class="nav-dot" onclick="goToSlide(1)"></div>
+                    <div class="nav-dot active"></div>
+                    <div class="nav-dot" onclick="goToSlide(3)"></div>
+                    <div class="nav-dot" onclick="goToSlide(4)"></div>
+                </div>
+                <button class="btn" onclick="nextSlide()">VER MÁS →</button>
+            </div>
+        </div>
+
+        <!-- Slide 4: Libro complementario -->
+        <div class="slide slide-4">
+            <div>
+                <h2>📖 TE PUEDE INTERESAR TAMBIÉN</h2>
+                
+                <div class="book-card">
+                    <h3>Enciclopedia de Técnicas de Dibujo</h3>
+                    <p class="author">Ian Simpson</p>
+                    <p>Una guía visual completa con todas las técnicas explicadas paso a paso</p>
+                    
+                    <ul class="book-features">
+                        <li>Más de 15 técnicas diferentes</li>
+                        <li>Ejemplos visuales en cada página</li>
+                        <li>Desde lo básico hasta técnicas avanzadas</li>
+                        <li>Formato enciclopédico de consulta rápida</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div>
+                <div class="navigation">
+                    <div class="nav-dot" onclick="goToSlide(0)"></div>
+                    <div class="nav-dot" onclick="goToSlide(1)"></div>
+                    <div class="nav-dot" onclick="goToSlide(2)"></div>
+                    <div class="nav-dot active"></div>
+                    <div class="nav-dot" onclick="goToSlide(4)"></div>
+                </div>
+                <button class="btn" onclick="nextSlide()">¿DÓNDE ESTÁ? →</button>
+            </div>
+        </div>
+
+        <!-- Slide 5: Ubicación -->
+        <div class="slide slide-5">
+            <div>
+                <h2>📍 ENCONTRALOS EN LA BIBLIOTECA</h2>
+                
+                <div class="location-info">
+                    <h3>📚 La técnica del dibujo</h3>
+                    <p>🔖 Sección: Arte - Técnicas</p>
+                    <p>📚 Clasificación: [Tu código]</p>
+                    <p>🏛️ Estante: [Ubicación específica]</p>
+                </div>
+                
+                <div class="location-info">
+                    <h3>📚 Enciclopedia de Técnicas</h3>
+                    <p>🔖 Sección: Arte - Técnicas</p>
+                    <p>📚 Clasificación: [Tu código]</p>
+                    <p>🏛️ Estante: [Ubicación específica]</p>
+                </div>
+                
+                <div class="info-box" style="background: rgba(255,255,255,0.2); color: white; border-left-color: white;">
+                    <p><strong>✅ Disponibles para préstamo domiciliario</strong></p>
+                    <p>⏰ Consultá horarios de atención en mostrador</p>
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <button class="btn">RESERVAR AHORA</button>
+                <button class="btn btn-secondary">VER MÁS LIBROS DE ARTE</button>
+                <div class="navigation">
+                    <div class="nav-dot" onclick="goToSlide(0)"></div>
+                    <div class="nav-dot" onclick="goToSlide(1)"></div>
+                    <div class="nav-dot" onclick="goToSlide(2)"></div>
+                    <div class="nav-dot" onclick="goToSlide(3)"></div>
+                    <div class="nav-dot active"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateNavigation();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function goToSlide(n) {
+            showSlide(n);
+        }
+
+        function updateNavigation() {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Soporte para deslizar
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
